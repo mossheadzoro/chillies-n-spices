@@ -1,8 +1,8 @@
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
 import { MongoClient } from "mongodb"
-const MONGO_URL=process.env.MONGO_URI
-if (!MONGO_URL) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+const MONGO_URI=process.env.MONGO_URI
+if (!MONGO_URI) {
+  throw new Error('Invalid/Missing environment variable: "MONGO_URI"')
 }
 
 const uri = MONGO_URL
