@@ -28,7 +28,7 @@ export default function Home() {
         />
         <div className="mt-8">
           <a className="text-4xl underline text-gray-500" href="tel:+46738123123">
-            +46 738 123 123
+            +91-7890514406 Guys Dont Spam :)
           </a>
         </div>
       </section>
