@@ -1,7 +1,6 @@
 import {PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
 import uniqid from 'uniqid';
-const AWS_ACCESS_KEY="AKIA47CRVDGXNW2TVC2B"
-const AWS_SECRET_KEY="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"
+
 export async function POST(req) {
   const data =  await req.formData();
   if (data.get('file')) {
@@ -11,8 +10,8 @@ export async function POST(req) {
     const s3Client = new S3Client({
       region: 'ap-south-1',
       credentials: {
-        accessKeyId: AWS_ACCESS_KEY,
-        secretAccessKey: AWS_SECRET_KEY,
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_KEY,
       },
     });
 

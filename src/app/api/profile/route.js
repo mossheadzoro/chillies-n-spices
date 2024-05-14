@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
 
 export async function PUT(req) {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
   const data = await req.json();
   const {_id, name, image, ...otherUserInfo} = data;
 
@@ -26,7 +26,7 @@ export async function PUT(req) {
 }
 
 export async function GET(req) {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
 
   const url = new URL(req.url);
   const _id = url.searchParams.get('_id');

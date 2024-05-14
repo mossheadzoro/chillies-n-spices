@@ -3,10 +3,10 @@ import {MenuItem} from "@/models/MenuItem";
 import {Order} from "@/models/Order";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
-const stripe = require('stripe')("sk_test_51PCFAYSH9crCnXmXafIZXNaJEI6wQHjCCwuHLYFdIujcuex9dQSLFHWRVC5OowBtWrt48CKEbY6CirKq7b4iEA3w002aXUoPq4");
+const stripe = require('stripe')(process.env.STRIPE_SK);
 
 export async function POST(req) {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
 
   const {cartProducts, address} = await req.json();
   const session = await getServerSession(authOptions);
@@ -57,8 +57,8 @@ export async function POST(req) {
     line_items: stripeLineItems,
     mode: 'payment',
     customer_email: userEmail,
-    success_url: "http://localhost:3000/" + 'orders/' + orderDoc._id.toString() + '?clear-cart=1',
-    cancel_url: "http://localhost:3000/" + 'cart?canceled=1',
+    success_url: process.env.NEXTAuth_URL + 'orders/' + orderDoc._id.toString() + '?clear-cart=1',
+    cancel_url: process.env.NEXTAuth_URL + 'cart?canceled=1',
     metadata: {orderId:orderDoc._id.toString()},
     payment_intent_data: {
       metadata:{orderId:orderDoc._id.toString()},

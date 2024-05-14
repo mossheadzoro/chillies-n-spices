@@ -3,7 +3,7 @@ import {Category} from "@/models/Category";
 import mongoose from "mongoose";
 
 export async function POST(req) {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
   const {name} = await req.json();
   if (await isAdmin()) {
     const categoryDoc = await Category.create({name});
@@ -14,7 +14,7 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
   const {_id, name} = await req.json();
   if (await isAdmin()) {
     await Category.updateOne({_id}, {name});
@@ -23,14 +23,14 @@ export async function PUT(req) {
 }
 
 export async function GET() {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
   return Response.json(
     await Category.find()
   );
 }
 
 export async function DELETE(req) {
-  mongoose.connect("mongodb+srv://food-ordering:ldpQQODlMZo24b8I@cluster0.tjhvwss.mongodb.net/food-ordering");
+  mongoose.connect(process.env.MONGO_URI);
   const url = new URL(req.url);
   const _id = url.searchParams.get('_id');
   if (await isAdmin()) {
