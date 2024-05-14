@@ -5,7 +5,7 @@ if (!MONGO_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGO_URI"')
 }
 
-const uri = MONGO_URL
+const uri = MONGO_URI
 const options = {}
 
 let client
